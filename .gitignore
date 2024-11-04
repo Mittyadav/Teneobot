@@ -1,3 +1,4 @@
 *.txt
 !userid.txt
 env
+!requirements.txt
