@@ -1,7 +1,6 @@
 import os
 import aiohttp
 import asyncio
-from datetime import datetime
 from colorama import Fore, Style
 from datetime import datetime
 
