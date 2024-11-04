@@ -1,0 +1,3 @@
+*.txt
+!userid.txt
+env
