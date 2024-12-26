@@ -22,7 +22,7 @@ class TeneoXD:
     def __init__(self, no, ping_interval, max_retry):
         self.wss_url = "wss://secure.ws.teneo.pro/websocket"
         self.no = no
-        self.ping_interval
+        self.ping_interval = ping_interval
         self.max_retry = max_retry
 
     def log(self, msg):
