@@ -1,4 +1,4 @@
-import aiohttp
+import httpx
 
 
 async def main():
@@ -30,14 +30,14 @@ async def main():
         "x-client-info": "supabase-js-web/2.45.4",
         "x-supabase-api-version": "2024-01-01",
     }
-    async with aiohttp.ClientSession() as client:
+    async with httpx.AsyncClient(headers=headers) as client:
         result = await client.post(login_url, json=login_data, headers=headers)
-        if result.status != 200:
+        if result.status_code != 200:
             print(f"[x] login failure, try again later or get data manual !")
             exit()
-        res = await result.json()
+        res = result.json()
         userid = res.get("user", {}).get("id")
-        open("userid.txt", "w").write(userid)
+        open("userids.txt", "w").write(f"{userid}\n")
         print(f"[+] login success, now run main.py !")
 
 

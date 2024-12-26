@@ -1,4 +1,5 @@
 *.txt
-!userid.txt
+!userids.txt
+!proxies.txt
 env
 !requirements.txt
