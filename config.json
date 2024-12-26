@@ -1,3 +1,4 @@
 {
-    "ping_interval": 10
+    "ping_interval": 10,
+    "max_retry": 10
 }

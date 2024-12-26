@@ -57,9 +57,10 @@ Untuk kalian yang malas aktif selama 24/7
 
 7. Edit `config.json` jika anda ingin mengubah config,berikut tabel penjelasan isi `config.json`
    
-   | key           | description                  | value       |
-   | ------------- | ---------------------------- | ----------- |
-   | ping_interval | waktu tunggu/jeda antar ping | harus angka |
+   | key           | description                    | value       |
+   | ------------- | ------------------------------ | ----------- |
+   | ping_interval | waktu tunggu/jeda antar ping   | harus angka |
+   | max_retry     | maksimal uji coba ketika error | harus angka |
 
 8. Jika kalian ingin menggunakan proxy maka masukkan proxy kalian ke file `proxies.txt`, format proxy yang digunakan adalah seperti berikut :
    

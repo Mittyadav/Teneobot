@@ -2,6 +2,8 @@
 
 For those who don't want to stay active 24/7
 
+README bahasa indonesia : [README_ID.md](README_ID.md)
+
 # Features
 
 - [x] Multiple accounts
@@ -57,9 +59,10 @@ For those who don't want to stay active 24/7
 
 7. Edit `config.json` if you want to change the config, here's an explanation table for `config.json` contents
    
-   | key           | description                   | value          |
-   | ------------- | ----------------------------- | -------------- |
-   | ping_interval | wait time/delay between pings | must be number |
+   | key           | description                   | value            |
+   | ------------- | ----------------------------- | ---------------- |
+   | ping_interval | wait time/delay between pings | must be number   |
+   | max_retry     | maximum retries when error    | must be a number |
 
 8. If you want to use a proxy, enter your proxy into the `proxies.txt` file, the proxy format used is as follows:
    

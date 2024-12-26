@@ -19,17 +19,18 @@ reset = Style.RESET_ALL
 
 
 class TeneoXD:
-    def __init__(self, no, ping_interval):
+    def __init__(self, no, ping_interval, max_retry):
         self.wss_url = "wss://secure.ws.teneo.pro/websocket"
         self.no = no
         self.ping_interval
+        self.max_retry = max_retry
 
     def log(self, msg):
         now = datetime.now().isoformat(" ").split(".")[0]
         print(f"{black}[{now}]{reset} {blue}[{self.no}]{reset} {msg}{reset}")
 
     async def connect(self, userid, proxy=None):
-        max_retry = 20
+
         retry = 1
         headers = {
             "Host": "secure.ws.teneo.pro",
@@ -45,7 +46,7 @@ class TeneoXD:
         }
         while True:
             try:
-                if retry >= max_retry:
+                if retry >= self.max_retry:
                     self.log(f"{yellow}max retrying reacted, try again later 1")
                     return
                 async with httpx.AsyncClient(headers=headers, proxy=proxy) as client:
@@ -114,11 +115,16 @@ async def main():
     configs = open("config.json").read()
     config = json.loads(configs)
     interval = config.get("ping_interval", 10)
+    max_retry = config.get("max_retry", 10)
     tasks = []
     for no, id in enumerate(userids):
         proxy = get_proxy(no, proxies)
         tasks.append(
-            asyncio.create_task(TeneoXD(no=no + 1).connect(userid=id, proxy=proxy))
+            asyncio.create_task(
+                TeneoXD(no=no + 1, ping_interval=interval, max_retry=max_retry).connect(
+                    userid=id, proxy=proxy
+                )
+            )
         )
         print(f"preparing tasks-{no} ", flush=True, end="\r")
     print("                         ", flush=True, end="\r")
