@@ -51,9 +51,9 @@ Untuk kalian yang malas aktif selama 24/7
    ```
    pip install -r requirements.txt
    ```
-6. Masukkan userid akun kalian ke file `userids.txt`
+6. Masukkan akses token akun kalian ke file `data.txt`
    
-   Kalian bisa mendapatkan userid dari akun kalian dengan menjalankan file `login.py` dimana ketika berhasil akan otomatis mengisi userid akun kalian ke file `userids.txt`.
+   [Cara mendapatkan Akses Token Akun](#Cara-Mendapatkan-Akses-Token)
 
 7. Edit `config.json` jika anda ingin mengubah config,berikut tabel penjelasan isi `config.json`
    
@@ -84,6 +84,28 @@ Untuk kalian yang malas aktif selama 24/7
     ```
     python main.py
     ```
+
+# Cara mendapatkan Akses Token
+
+1. Masuk ke halaman dashboard teneo
+   
+   [https://dashboard.teneo.pro/](https://dashboard.teneo.pro/)
+
+2. Buka devtool, kalian bisa menekan tombol f11/f12 atau klik kanan -> inspect element.
+
+3. Masuk ke menu console
+
+4. Ketikan `allow pasting` agar bisa melakukan paste kode javascript
+
+5. Paste kode javascript berikut ke menu console
+
+   ```
+   copy(localStorage.getItem('accessToken'))
+   ```
+
+6. Kemudian paste / ctrol + v karena kode javascript diatas memiliki fungsi untuk mencopy dan memasukkan akses token ke clipboard perangkat kalian. Jika akses token tidak muncul atau tidak muncul apapun ketika di paste maka ada yang salah dengan aksi yang kalian lakukan.
+
+7. Paste akses token ke file `data.txt`
 
 # Traktir saya kopi
 
