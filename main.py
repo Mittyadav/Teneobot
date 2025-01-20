@@ -30,7 +30,6 @@ class TeneoXD:
         print(f"{black}[{now}]{reset} {blue}[{self.no}]{reset} {msg}{reset}")
 
     async def connect(self, userid, proxy=None):
-
         retry = 1
         headers = {
             "Host": "secure.ws.teneo.pro",
@@ -41,7 +40,8 @@ class TeneoXD:
             "Upgrade": "websocket",
             "Origin": "chrome-extension://emcclcoaglgcpoognfiggmhnhgabppkm",
             "Sec-WebSocket-Version": "13",
-            "Accept-Language": "en-US,en;q=0.9,id;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Sec-WebSocket-Key": "KyOuNBSr7UixYjliT2sIgw==",
             "Sec-WebSocket-Extensions": "permessage-deflate; client_max_window_bits",
         }
         while True:
@@ -51,7 +51,7 @@ class TeneoXD:
                     return
                 async with httpx.AsyncClient(headers=headers, proxy=proxy) as client:
                     async with httpx_ws.aconnect_ws(
-                        url=f"{self.wss_url}?userId={userid}&version=v0.2",
+                        url=f"{self.wss_url}?accessToken={userid}&version=v0.2",
                         client=client,
                     ) as wss:
                         retry = 1
@@ -67,8 +67,17 @@ class TeneoXD:
                                 await wss.send_json({"type": "PING"})
                                 self.log(f"{white}send {green}PING {white}server !")
                                 await countdown(self.ping_interval)
+            except httpx.ReadTimeout:
+                self.log(f"{red}error : {white}connection timeout !")
+                retry += 1
+                continue
+            except httpx_ws._exceptions.WebSocketUpgradeError:
+                self.log(f"{red}error : {white}websocket upgrade error !")
+                retry += 1
+                continue
             except Exception as e:
-                self.log(f"{red}error : {white}{e}")
+                # print(dir(e))
+                self.log(f"{red}error : {white}{e.__str__()}")
                 retry += 1
                 continue
 
@@ -107,23 +116,30 @@ async def main():
     {green}Github: {white}github.com/AkasakaID
           """
     )
-    if not os.path.exists("userids.txt"):
+    if not os.path.exists("data.txt"):
         print(f"{red}error: {white}userid.txt file is not found !")
         exit()
-    userids = open("userids.txt").read().splitlines()
+    tokens = open("data.txt").read().splitlines()
     proxies = open("proxies.txt").read().splitlines()
     configs = open("config.json").read()
     config = json.loads(configs)
     interval = config.get("ping_interval", 10)
     max_retry = config.get("max_retry", 10)
     tasks = []
-    for no, id in enumerate(userids):
+    print(f"{green}total account token : {white}{len(tokens)}")
+    print(f"{green}total proxy : {white}{len(proxies)}")
+    print(f"{green}ping interval : {white}{interval}")
+    print(f"{green}max retrying : {white}{max_retry}")
+    print()
+    for no, id in enumerate(tokens):
         proxy = get_proxy(no, proxies)
         tasks.append(
             asyncio.create_task(
-                TeneoXD(no=no + 1, ping_interval=interval, max_retry=max_retry).connect(
-                    userid=id, proxy=proxy
-                )
+                TeneoXD(
+                    no=str(no + 1).zfill(len(tokens)),
+                    ping_interval=interval,
+                    max_retry=max_retry,
+                ).connect(userid=id, proxy=proxy)
             )
         )
         print(f"preparing tasks-{no} ", flush=True, end="\r")
@@ -140,4 +156,4 @@ if __name__ == "__main__":
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
         asyncio.run(main())
     except KeyboardInterrupt:
-        exit()
+        sys.exit()

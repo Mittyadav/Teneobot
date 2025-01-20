@@ -1,2 +1,2 @@
 colorama
-aiohttp
+httpx-ws
