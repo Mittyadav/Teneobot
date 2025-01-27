@@ -13,13 +13,13 @@ For those who don't want to stay active 24/7
 2. Clone this repository
    
    ```
-   git clone https://github.com/akasakaid/teneoxd
+   git clone https://github.com/Mittyadav/Teneobot
    ```
 
 3. Navigate to the teneoxd folder
    
    ```
-   cd teneoxd
+   cd Teneobot
    ```
 
 4. Optional step: Create a virtual environment
@@ -93,8 +93,6 @@ For those who don't want to stay active 24/7
 
 7. Paste the access token into the `data.txt` file
 
-# Buy Me a Coffee
-- Indonesia: [https://trakteer.id/fawwazthoerif/tip](https://trakteer.id/fawwazthoerif/tip)
-- International: [https://sociabuzz.com/fawwazthoerif/tribe](https://sociabuzz.com/fawwazthoerif/tribe)
+
 
 # Thank you
