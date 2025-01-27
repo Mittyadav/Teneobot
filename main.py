@@ -109,11 +109,20 @@ async def main():
     os.system("cls" if os.name == "nt" else "clear")
     print(
         f"""
-    {magenta}╔═╗╔╦╗╔═╗  {green}╔═╗┬─┐┌─┐ ┬┌─┐┌─┐┌┬┐
-    {magenta}╚═╗ ║║╚═╗  {green}╠═╝├┬┘│ │ │├┤ │   │ 
-    {magenta}╚═╝═╩╝╚═╝  {green}╩  ┴└─└─┘└┘└─┘└─┘ ┴ 
+ -================= ≫ ──── ≪•◦ ❈ ◦•≫ ──── ≪=================-
+{green} │                                                          │
+{magenta}│  ██████╗  █████╗ ██████╗ ██╗  ██╗                        │
+{green} │  ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝                        │
+{magenta} │  ██║  ██║███████║██████╔╝█████╔╝                         │
+{green} │  ██║  ██║██╔══██║██╔══██╗██╔═██╗                         │
+{magenta} │  ██████╔╝██║  ██║██║  ██║██║  ██╗                        │
+{green} │  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝                        │
+{magenta} │                                                          │
+{green} │                                                          │
+ ╰─━━━━━━━━━━━━━━━━━━━━━━━━Termux-os━━━━━━━━━━━━━━━━━━━━━━━─╯
     
-    {green}Github: {white}github.com/AkasakaID
+    {green}Github: {white}github.com/Mittyadav
+    JOIN OUR TELEGRAM CHANNEL: @SCRIPTHUB00
           """
     )
     if not os.path.exists("data.txt"):
